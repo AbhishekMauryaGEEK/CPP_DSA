@@ -1,22 +1,65 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<time.h>
-char RPS(int);
-void main()
-{
-int n;
-printf("----ROCK PAPER AND SCISSORS----");
-printf("How many round compition you want to have:");
-scanf("%d",&n);
-for(int i=1;i<=n;i++){
-RPS(int i);
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+char generateComputerChoice() {
+    int num = rand() % 3;
+    switch (num) {
+        case 0:
+            return 'R';
+        case 1:
+            return 'P';
+        case 2:
+            return 'S';
+        default:
+            return ' ';
+    }
 }
-printf("/n Enter your choise:");
-printf("/n R for Rock");
-printf("/n P for Paper");
-printf("/n S for Scissors");
-char c;
 
-
-
+void determineWinner(char userChoice, char computerChoice) {
+    if (userChoice == computerChoice) {
+        printf("It's a draw!\n");
+    } else if ((userChoice == 'R' && computerChoice == 'S') ||
+                (userChoice == 'P' && computerChoice == 'R') ||
+                (userChoice == 'S' && computerChoice == 'P')) {
+        printf("You win!\n");
+    } else {
+        printf("Computer wins!\n");
+    }
 }
+
+int main() {
+    srand(time(NULL));
+    int numRounds;
+    printf("\n");
+    printf("-----Welcome to Rock-Paper-Scissors!-----\n");
+    printf("\nHow many rounds would you like to play? ");
+    scanf("%d", &numRounds);
+    int userWins = 0;
+    int computerWins = 0;
+    int DRAW =0;
+    for (int i = 0; i < numRounds; i++) {
+        char userChoice;
+        printf("\nEnter your choice (R/P/S): ");
+        scanf(" %c", &userChoice);
+        char computerChoice = generateComputerChoice();
+        printf("Computer chose: %c\n", computerChoice);
+        determineWinner(userChoice, computerChoice);
+        if (userChoice == computerChoice) {
+            DRAW++;
+        } else if ((userChoice == 'R' && computerChoice == 'S') ||
+                    (userChoice == 'P' && computerChoice == 'R') ||
+                    (userChoice == 'S' && computerChoice == 'P')) {
+            userWins++;
+        } else {
+            computerWins++;
+        }
+    }
+    printf("\nFinal Score:\n");
+    printf("You: %d\n", userWins);
+    printf("Computer: %d\n", computerWins);
+    printf("DRAWS: %d\n", DRAW);
+    return 0;
+}
+
