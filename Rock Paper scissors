@@ -1,2 +1,22 @@
 #include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+char RPS(int);
+void main()
+{
+int n;
+printf("----ROCK PAPER AND SCISSORS----");
+printf("How many round compition you want to have:");
+scanf("%d",&n);
+for(int i=1;i<=n;i++){
+RPS(int i);
+}
+printf("/n Enter your choise:");
+printf("/n R for Rock");
+printf("/n P for Paper");
+printf("/n S for Scissors");
+char c;
 
+
+
+}
